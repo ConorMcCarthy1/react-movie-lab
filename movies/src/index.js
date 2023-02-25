@@ -1,7 +1,22 @@
-import React from "react";
+import React from "react"; 
+<Route path="/movies/:id" component={MoviePage} />
 import { createRoot } from "react-dom/client";
-import HomePage from "./pages/homePage"; 
-import MovieDetailsPage from './pages/movieDetailsPage'
+import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
+import HomePage from "./pages/homePage";
+import MoviePage from "./pages/movieDetailsPage";
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/movies/:id" element={<MoviePage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={ <Navigate to="/" /> } />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 
 
 const sample = {
@@ -87,11 +102,7 @@ const sample = {
 
 const movies = [sample, sample, sample, sample, sample, sample, sample];
 
-const App = () => {
-  return (
-      <MovieDetailsPage movie={sample} images={images} />
-      );
-};
+
 
 const images = [
   "/kOVEVeg59E0wsnXmF9nrh6OmWII.jpg",
