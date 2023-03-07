@@ -1,32 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";  
 import PageTemplate from '../components/templateMovieListPage' 
 import { getMovies } from "../api/tmdb-api";
 
 
 const HomePage = (props) => {
   const [movies, setMovies] = useState([]);
-  const favorites = movies.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
-
-  const addToFavorites = (movieId) => {
-    const updatedMovies = movies.map((m) =>
-      m.id === movieId ? { ...m, favorite: true } : m
-    );
-    setMovies(updatedMovies);
-  };
 
   useEffect(() => {
-     getMovie(id).then((movie) => {
-       setMovie(movie);
-     });
-   }, [id]);
- 
-   useEffect(() => {
-     getMovieImages(id).then((images) => {
-       setImages(images);
-     });
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
+    fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=1`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log(json);
+        return json.results;
+      })
+      .then((movies) => {
+        setMovies(movies);
+      });
+  }, []);
+
  
   return (
     <PageTemplate

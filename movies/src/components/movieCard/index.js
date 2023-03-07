@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react"; 
 import Avatar from '@mui/material/Avatar';
 import Card from "@mui/material/Card";
@@ -12,7 +13,6 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid"; 
-import { Link } from "react-router-dom";
 import img from '../../images/film-poster-placeholder.png'
 
 export default function MovieCard(props) {
@@ -67,7 +67,7 @@ export default function MovieCard(props) {
       <IconButton aria-label="add to favorites" onClick={handleAddToFavorite}>
         <FavoriteIcon color="primary" fontSize="large" />
     </IconButton>
-        <Link to={`/movies/${movie.id}`}>
+    <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
